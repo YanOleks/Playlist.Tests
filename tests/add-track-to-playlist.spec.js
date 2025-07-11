@@ -14,6 +14,7 @@ test.describe('Adding track functionality', () => {
         
         const trackInPlaylist = page.locator('//*[@id="playlist"]/div/div');
         const textContent = await trackInPlaylist.textContent();
+        
         expect(trackInPlaylist).toHaveCount(1);
         expect(textContent.trim()).toContain(newStr);
     })
