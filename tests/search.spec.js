@@ -1,4 +1,4 @@
-const { test, expect } = require('@playwright/test');
+import { test, expect } from '@playwright/test';
 
 const validTracks = [
   'summer',
@@ -20,7 +20,7 @@ test.describe('Search track functionality', () => {
       await page.getByRole('textbox', { name: 'Search' }).fill(trackName);
       await page.waitForTimeout(300);
 
-      const visibleTracks = await page.$$eval('//*[@id="tracklist"]/div', els =>
+      const visibleTracks = await page.locator('#tracklist > div > div').evaluateAll(els =>
         els.map(el => el.textContent.trim().toLowerCase())
       );
 
@@ -37,7 +37,7 @@ test.describe('Search track functionality', () => {
       await page.getByRole('textbox', { name: 'Search' }).fill(trackName);
       await page.waitForTimeout(300);
 
-      const visibleTracks = await page.$$eval('//*[@id="tracklist"]/div', els =>
+      const visibleTracks = await page.locator('#tracklist > div > div').evaluateAll(els =>
         els.map(el => el.textContent.trim().toLowerCase())
       );
       expect(visibleTracks.length).toBe(0);
